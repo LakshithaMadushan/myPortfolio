@@ -13,15 +13,22 @@
   <!--<script type="text/javascript" src="../src/assets/js/libs/jquery.magnific-popup.js"></script>-->
   <!--<script type="text/javascript" src="../src/assets/js/scripts.js"></script>-->
 
-  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,600,700%7CLato:400,700' type='text/css' media='all'/>
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,600,700%7CLato:400,700' type='text/css'
+        media='all'/>
   <link rel="stylesheet" type="text/css" href="../../assets/css/libs/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="../../assets/css/libs/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../../assets/css/libs/justifiedGallery.min.css">
   <link rel="stylesheet" type="text/css" href="../../assets/css/libs/magnific-popup.css">
-  <link rel="stylesheet" type="text/css" href="../../assets/css/styles.css">
+  <link id="myStyle" rel="stylesheet" type="text/css">
+
+  <script>
+    var x = Math.floor(Math.random() * 3) + 1;
+    console.log(x);
+    document.getElementById("myStyle").href = "../../assets/css/styles" + ".css";
+  </script>
 
 </head>
 <body>
-  <app-root></app-root>
+<app-root></app-root>
 </body>
 </html>
