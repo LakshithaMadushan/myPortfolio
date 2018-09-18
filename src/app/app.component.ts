@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +6,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'myThings';
+
+  showMenu: boolean = false;
+  isPageLoading: boolean = true;
+  selectedTab: string = 'MyThings';
+
+
+  constructor() {
+    setTimeout(() => {
+      this.isPageLoading = false;
+    }, 3000);
+  }
+
+  clickMobileMenubtn(event) {
+    this.showMenu = event;
+  }
+
+  changeContent(selectedTab) {
+    this.selectedTab = selectedTab;
+  }
+
+  currentPageNumber(pageNumber){
+    console.log(pageNumber);
+  }
+
 }
