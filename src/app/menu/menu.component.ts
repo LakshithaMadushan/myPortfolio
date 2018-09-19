@@ -18,9 +18,14 @@ export class MenuComponent implements OnInit {
   }
 
   selectTab(tabName: string) {
+
+    if (this.selectedTab != tabName) {
+      window.scrollTo(0, 0);
+    }
+
     this.selectedTab = tabName;
     this.selectNewTab.emit(this.selectedTab);
-    window.scrollTo(0, 0);
+
   }
 
 }
