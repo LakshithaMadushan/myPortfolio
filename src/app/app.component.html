@@ -5,8 +5,8 @@
   <div class="container">
     <div class="row">
 
-      <app-article-container *ngIf="selectedTab=='MyThings'"></app-article-container>
-      <app-about-me *ngIf="selectedTab=='AboutMe'"></app-about-me>
+      <app-article-container [@fadeAnimation] *ngIf="selectedTab=='MyThings'"></app-article-container>
+      <app-about-me [@fadeAnimation] *ngIf="selectedTab=='AboutMe'"></app-about-me>
       <app-menu (selectNewTab)="changeContent($event)" [showMenu]="showMenu"></app-menu>
 
       <app-pageination (currentPage)="currentPageNumber($event)" *ngIf="selectedTab=='MyThings'"></app-pageination>

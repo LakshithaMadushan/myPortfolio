@@ -1,9 +1,19 @@
 import {Component} from '@angular/core';
+import {trigger, state, style, transition, animate} from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('fadeAnimation', [
+      state('in', style({opacity: 1})),
+      transition(':enter', [
+        style({opacity: 0}),
+        animate(200)
+      ])
+    ]),
+  ]
 })
 export class AppComponent {
 
@@ -26,7 +36,7 @@ export class AppComponent {
     this.selectedTab = selectedTab;
   }
 
-  currentPageNumber(pageNumber){
+  currentPageNumber(pageNumber) {
     console.log(pageNumber);
   }
 

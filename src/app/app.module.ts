@@ -10,6 +10,7 @@ import { MenuComponent } from './menu/menu.component';
 import { PageinationComponent } from './pageination/pageination.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutMeComponent } from './about-me/about-me.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AboutMeComponent } from './about-me/about-me.component';
     AboutMeComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
