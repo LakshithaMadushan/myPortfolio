@@ -1,8 +1,8 @@
 <div id="main-content">
 
-  <app-mobile-menu (showMobileMenu)="clickMobileMenubtn($event)"></app-mobile-menu>
+  <app-mobile-menu *ngIf="!isPageLoading" (showMobileMenu)="clickMobileMenubtn($event)"></app-mobile-menu>
 
-  <div class="container">
+  <div *ngIf="!isPageLoading" class="container">
     <div class="row">
 
       <app-article-container [@fadeAnimation] *ngIf="selectedTab=='MyThings'"></app-article-container>
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <app-footer></app-footer>
+  <app-footer *ngIf="!isPageLoading"></app-footer>
 
   <app-loader [isLoading]="isPageLoading"></app-loader>
 
