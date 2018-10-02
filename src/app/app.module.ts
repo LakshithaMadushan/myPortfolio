@@ -11,6 +11,7 @@ import { PageinationComponent } from './pagination/pagination.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutMeComponent } from './about-me/about-me.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddNewArticleComponent } from './add-new-article/add-new-article.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MenuComponent,
     PageinationComponent,
     FooterComponent,
-    AboutMeComponent
+    AboutMeComponent,
+    AddNewArticleComponent
   ],
   imports: [
     BrowserModule,

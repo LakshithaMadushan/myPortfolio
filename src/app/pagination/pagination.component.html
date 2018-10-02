@@ -1,7 +1,7 @@
 <!-- Pagination -->
 <div class="pagination-wrap">
   <ul>
-    <li (click)="clickArrow('previous')">
+    <li [ngStyle]="{'visibility': (currentSelectedPage != start)? 'visible' : 'hidden'}" (click)="clickArrow('previous')">
       <a>
         <i class="fa fa-long-arrow-left"></i>
       </a>
@@ -11,7 +11,7 @@
       <a [ngClass]="(currentSelectedPage===i)?'page-numbers current':'page-numbers'">{{i}}</a>
     </li>
 
-    <li (click)="clickArrow('next')">
+    <li [ngStyle]="{'visibility': (currentSelectedPage != end)? 'visible' : 'hidden'}" (click)="clickArrow('next')">
       <a>
         <i class="fa fa-long-arrow-right"></i>
       </a>
