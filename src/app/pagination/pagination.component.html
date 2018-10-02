@@ -1,9 +1,9 @@
 <!-- Pagination -->
 <div class="pagination-wrap">
   <ul>
-    <li>
-      <a class="prev page-numbers">
-        <i (click)="clickArrow('previous')" class="fa fa-long-arrow-left"></i>
+    <li (click)="clickArrow('previous')">
+      <a>
+        <i class="fa fa-long-arrow-left"></i>
       </a>
     </li>
 
@@ -11,9 +11,9 @@
       <a [ngClass]="(currentSelectedPage===i)?'page-numbers current':'page-numbers'">{{i}}</a>
     </li>
 
-    <li>
-      <a class="next page-numbers">
-        <i (click)="clickArrow('next')" class="fa fa-long-arrow-right"></i>
+    <li (click)="clickArrow('next')">
+      <a>
+        <i class="fa fa-long-arrow-right"></i>
       </a>
     </li>
   </ul>

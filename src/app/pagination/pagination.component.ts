@@ -2,19 +2,26 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-pageination',
-  templateUrl: './pageination.component.html',
-  styleUrls: ['./pageination.component.css']
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.css']
 })
 export class PageinationComponent implements OnInit {
 
-  @Input() itemArray: any = [1, 2, 3, 4, 5];
+  @Input() start: number;
+  @Input() end: number;
+
   @Output() currentPage: any = new EventEmitter();
+
+  itemArray: any = [];
   currentSelectedPage: number = 1;
 
   constructor() {
   }
 
   ngOnInit() {
+    for (var num = this.start; num <= this.end; num++) {
+      this.itemArray.push(num);
+    }
   }
 
   clickArrow(directions) {

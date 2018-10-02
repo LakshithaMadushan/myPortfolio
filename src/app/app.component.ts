@@ -21,6 +21,8 @@ export class AppComponent {
   isPageLoading: boolean = true;
   selectedTab: string = 'MyThings';
 
+  paginationStart: number = 1;
+  paginationEnd: number = 5;
 
   constructor() {
     setTimeout(() => {

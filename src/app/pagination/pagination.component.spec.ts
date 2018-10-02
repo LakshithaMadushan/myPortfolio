@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageinationComponent } from './pageination.component';
+import { PageinationComponent } from './pagination.component';
 
 describe('PageinationComponent', () => {
   let component: PageinationComponent;
