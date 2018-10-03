@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutMeComponent } from './about-me/about-me.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddNewArticleComponent } from './add-new-article/add-new-article.component';
+import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddNewArticleComponent } from './add-new-article/add-new-article.compon
     PageinationComponent,
     FooterComponent,
     AboutMeComponent,
-    AddNewArticleComponent
+    AddNewArticleComponent,
+    AdminMenuComponent
   ],
   imports: [
     BrowserModule,

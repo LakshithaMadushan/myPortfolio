@@ -1525,7 +1525,8 @@ progress::-webkit-progress-value {
 #admin-content input[type=text] {
   border: none;
   color: #000000;
-  padding: 0 0px; !important;
+  padding: 0 0px;
+!important;
   background-color: #ededed;
   outline: 0;
   font-size: 25px;
@@ -1536,10 +1537,22 @@ progress::-webkit-progress-value {
 #admin-content input[type=text]:focus {
   border: none;
   color: #000000;
-  padding: 0 0px; !important;
+  padding: 0 0px;
+!important;
   background-color: #ededed;
   outline: 0;
   height: 36px;
   width: 100%;
 }
 
+#admin-content textarea {
+  border: none;
+  color: #000000;
+  font-size: 16px; !important;
+  background-color: #f7f7f7;
+}
+
+#admin-content textarea:focus {
+  background: none repeat scroll 0 0 #f7f7f7;
+  box-shadow: none;
+}

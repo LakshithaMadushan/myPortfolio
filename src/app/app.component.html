@@ -1,4 +1,4 @@
-<div *ngIf="true" id="main-content">
+<div *ngIf="false" id="main-content">
 
   <app-mobile-menu *ngIf="!isPageLoading" (showMobileMenu)="clickMobileMenubtn($event)"></app-mobile-menu>
 
@@ -25,8 +25,11 @@
 <!-- Admin Page-->
 <div *ngIf="true" id="admin-content">
 
+  <app-mobile-menu *ngIf="!isPageLoading" (showMobileMenu)="clickMobileMenubtn($event)"></app-mobile-menu>
+
   <div *ngIf="!isPageLoading" class="container">
     <div class="row">
+      <app-admin-menu (selectNewTab)="changeContent($event)" [showMenu]="showMenu"></app-admin-menu>
       <app-add-new-article></app-add-new-article>
     </div>
   </div>
