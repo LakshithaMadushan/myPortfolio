@@ -2,10 +2,27 @@
   <div class="projects">
     <article class="post">
       <div class="post-media">
-        <a href="single.html">
-          <img src="../../assets/images/posts/1.jpg" alt="Post">
-        </a>
-        <progress class="fs-progress" [value]=60 max="90"></progress>
+        <!--<a href="single.html">-->
+        <!--<i style="color: #00b9eb" class="fa fa-picture-o"></i>-->
+        <!--<img src="../../assets/images/posts/1.jpg" alt="Post">-->
+        <!--</a>-->
+
+
+        <div class="drop-zone on">
+          <h2 class="title">Add Article Image</h2>
+          <p>Drag and Drop a File</p>
+          <div class="file">
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fa fa-upload"></i>
+              </span>
+              <span class="file-label"> or choose a file</span>
+            </span>
+          </div>
+        </div>
+
+        <progress *ngIf="" class="fs-progress" [value]=60 max="90"></progress>
+
       </div>
       <div class="post-content">
         <h2 class="title">
@@ -21,7 +38,8 @@
         <!-- The Content -->
         <div class="the-excerpt">
           <p>
-            <textarea style="max-width: 100%; min-width: 100%;" class="form-control rounded-0" rows="10" placeholder="Write something about article."></textarea>
+            <textarea style="max-width: 100%; min-width: 100%;" class="form-control rounded-0" rows="10"
+                      placeholder="Write something about article."></textarea>
           </p>
         </div>
         <!-- End The Content -->

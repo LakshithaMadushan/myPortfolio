@@ -511,6 +511,7 @@ body {
   overflow-x: hidden;
   line-height: 24px;
   word-spacing: 1px;
+  min-width: 360px;
 }
 
 .container {
