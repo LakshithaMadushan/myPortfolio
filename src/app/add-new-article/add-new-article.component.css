@@ -15,6 +15,11 @@
 
 .file{
   padding: 5px;
-  border: 2px solid #000000;
+  border: 1px solid #000000;
   cursor: pointer;
+}
+
+.file:hover{
+  border: 1px solid #ababab;
+  color: #ababab;
 }
