@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-add-new-article',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddNewArticleComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  clickPushButton() {
+
   }
 
 }

@@ -2,12 +2,8 @@
   <div class="projects">
     <article class="post">
       <div class="post-media">
-        <!--<a href="single.html">-->
-        <!--<i style="color: #00b9eb" class="fa fa-picture-o"></i>-->
-        <!--<img src="../../assets/images/posts/1.jpg" alt="Post">-->
-        <!--</a>-->
 
-
+        <!-- Image Drop Zone -->
         <div class="drop-zone">
           <h2 class="title">Add Article Image</h2>
           <p>Drag and Drop a File</p>
@@ -20,8 +16,15 @@
             </span>
           </div>
         </div>
+        <!-- End Image Drop Zone -->
 
-        <progress *ngIf="" class="fs-progress" [value]=60 max="90"></progress>
+        <!-- Loaded Image -->
+        <a>
+          <img src="../../assets/images/posts/1.jpg" alt="Post">
+        </a>
+        <!-- End Loaded Image -->
+
+        <progress class="fs-progress" [value]=60 max="90"></progress>
 
       </div>
       <div class="post-content">
@@ -43,9 +46,14 @@
           </p>
         </div>
         <!-- End The Content -->
+        <div class="push-button">
+          <button (click)="clickPushButton()">Push</button>
+        </div>
+
       </div>
     </article>
   </div>
+  <hr>
   <app-spinner [inputValue]="4" [minValue]="1" [maxValue]="4"></app-spinner>
 </div>
 

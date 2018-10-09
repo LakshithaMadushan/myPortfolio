@@ -879,6 +879,10 @@ body {
   color: #000000;
 }
 
+.pagination-wrap ul li a .fas {
+  color: black;
+}
+
 .navigation-wrap {
   margin-top: 50px;
   text-align: center;
@@ -1562,8 +1566,8 @@ progress::-webkit-progress-value {
 
 app-spinner {
   display: block;
-  padding-left: 46%;
-  padding-bottom: 20px;
+  padding-left: 44.2%;
+  padding-bottom: 60px;
 }
 
 @media only screen and (max-width: 991px) {
@@ -1638,4 +1642,58 @@ app-spinner {
 
 .spinner__wrap .spinner__val[type=number]:focus {
   outline: none;
+}
+
+/* ===========  13. Drop Zone  =========== */
+
+.drop-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: 200;
+  height: 360px;
+  background: #d4d4d4;
+}
+
+.on {
+  background: #a5a5a5;
+  border: 2px solid #000000;
+}
+
+.file {
+  padding: 5px;
+  border: 1px solid #000000;
+  cursor: pointer;
+}
+
+.file:hover {
+  border: 1px solid #ababab;
+  color: #ababab;
+}
+
+.push-button {
+  display: block;
+  text-align: center;
+}
+
+.push-button button {
+  background-color: #0b0b0b;
+  border: none;
+  color: white;
+  padding: 3px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+hr {
+  /*border-color: #ababab;*/
+  margin-left: 30px;
+}
+
+/*admin menu*/
+.copyright.admin {
+  padding-top: 40px;
 }
