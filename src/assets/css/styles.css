@@ -1557,3 +1557,85 @@ progress::-webkit-progress-value {
   background: none repeat scroll 0 0 #f7f7f7;
   box-shadow: none;
 }
+
+/* ===========  12. Spinner  =========== */
+
+app-spinner {
+  display: block;
+  padding-left: 46%;
+  padding-bottom: 20px;
+}
+
+@media only screen and (max-width: 991px) {
+  app-spinner {
+    padding-left: 42%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  app-spinner {
+    padding-left: 42%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  app-spinner {
+    padding-left: 39%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  app-spinner {
+    padding-left: 32.5%;
+  }
+}
+
+.spinner__wrap .fas {
+  padding: 5px;
+}
+
+.spinner__wrap .spinner__minus, .spinner__plus {
+  background-color: #000000;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  outline: none;
+  /*height: 32.5px;
+  border-radius: 50%;*/
+}
+
+.spinner__wrap .spinner__minus.disable, .spinner__plus.disable {
+  opacity: 0.2;
+  cursor: inherit;
+}
+
+.spinner__wrap {
+  /*display: flex;*/
+}
+
+.spinner__wrap .spinner__val {
+  border: #000000 solid 1px;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  font-weight: 600;
+  margin: 0 5px;
+  padding: 0;
+  font-size: 13px;
+}
+
+.spinner__wrap .spinner__val[type=number] {
+  text-align: center;
+  font-size: 20px;
+}
+
+.spinner__wrap .spinner__val[type=number]::-webkit-outer-spin-button,
+.spinner__wrap .spinner__val[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.spinner__wrap .spinner__val[type=number]:focus {
+  outline: none;
+}
