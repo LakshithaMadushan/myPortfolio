@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddNewArticleComponent } from './add-new-article/add-new-article.component';
 import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     AboutMeComponent,
     AddNewArticleComponent,
     AdminMenuComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

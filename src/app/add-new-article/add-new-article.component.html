@@ -4,23 +4,24 @@
       <div class="post-media">
 
         <!-- Image Drop Zone -->
-        <div class="drop-zone">
+        <div *ngIf="!imageURL" class="drop-zone">
           <h2 class="title">Add Article Image</h2>
           <p>Drag and Drop a File</p>
           <div class="file">
+            <input class="file-input" type="file" (change)="chooseImageFile($event)">
             <span class="file-cta">
               <span class="file-icon">
                 <i class="fa fa-upload"></i>
               </span>
-              <span class="file-label"> or choose a file</span>
+              <span class="file-label">or choose a file</span>
             </span>
           </div>
         </div>
         <!-- End Image Drop Zone -->
 
         <!-- Loaded Image -->
-        <a>
-          <img src="../../assets/images/posts/1.jpg" alt="Post">
+        <a *ngIf="imageURL">
+          <img [src]="imageURL" alt="Post">
         </a>
         <!-- End Loaded Image -->
 
@@ -29,12 +30,12 @@
       </div>
       <div class="post-content">
         <h2 class="title">
-          <input type="text" placeholder="Enter article name"/>
+          <input type="text" placeholder="Enter article name" [(ngModel)]="articleName"/>
         </h2>
 
         <!-- Post Details -->
         <div class="post-details">
-          <input style="font-size: 14px" type="text" placeholder="Please enter date: ( Ex: October 9, 2017 )"/>
+          <input style="font-size: 14px" type="text" placeholder="Please enter date: ( Ex: October 9, 2017 )" [(ngModel)]="articleDate"/>
         </div>
         <!-- End Post Details -->
 
@@ -42,7 +43,7 @@
         <div class="the-excerpt">
           <p>
             <textarea style="max-width: 100%; min-width: 100%;" class="form-control rounded-0" rows="10"
-                      placeholder="Write something about article."></textarea>
+                      placeholder="Write something about article." [(ngModel)]="articleDescription"></textarea>
           </p>
         </div>
         <!-- End The Content -->
