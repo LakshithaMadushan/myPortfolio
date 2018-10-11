@@ -11,10 +11,10 @@ import { PageinationComponent } from './pagination/pagination.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutMeComponent } from './about-me/about-me.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AddNewArticleComponent } from './add-new-article/add-new-article.component';
 import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { ToastComponent } from './toast/toast.component';
+import { ArticleSkeletonComponent } from './article-skeleton/article-skeleton.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +27,10 @@ import { ToastComponent } from './toast/toast.component';
     PageinationComponent,
     FooterComponent,
     AboutMeComponent,
-    AddNewArticleComponent,
     AdminMenuComponent,
     SpinnerComponent,
-    ToastComponent
+    ToastComponent,
+    ArticleSkeletonComponent
   ],
   imports: [
     BrowserModule,

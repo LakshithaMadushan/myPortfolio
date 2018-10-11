@@ -1,16 +1,17 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-add-new-article',
-  templateUrl: './add-new-article.component.html',
-  styleUrls: ['./add-new-article.component.css']
+  selector: 'app-article-skeleton',
+  templateUrl: './article-skeleton.component.html',
+  styleUrls: ['./article-skeleton.component.css']
 })
-export class AddNewArticleComponent implements OnInit {
+export class ArticleSkeletonComponent implements OnInit {
 
   @Input() imageURL: string;  //'../../assets/images/posts/1.jpg'
   @Input() articleName: string;
   @Input() articleDate: string;
   @Input() articleDescription: string;
+  @Input() disableInputFields: boolean;
 
   constructor() {
   }
@@ -32,4 +33,5 @@ export class AddNewArticleComponent implements OnInit {
     console.log(this.articleDate);
     console.log(this.articleDescription);
   }
+
 }

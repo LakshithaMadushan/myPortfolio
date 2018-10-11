@@ -30,12 +30,12 @@
       </div>
       <div class="post-content">
         <h2 class="title">
-          <input type="text" placeholder="Enter article name" [(ngModel)]="articleName"/>
+          <input type="text" placeholder="Enter article name" [(ngModel)]="articleName" [disabled]="disableInputFields"/>
         </h2>
 
         <!-- Post Details -->
         <div class="post-details">
-          <input style="font-size: 14px" type="text" placeholder="Please enter date: ( Ex: October 9, 2017 )" [(ngModel)]="articleDate"/>
+          <input style="font-size: 14px" type="text" placeholder="Please enter date: ( Ex: October 9, 2017 )" [(ngModel)]="articleDate" [disabled]="disableInputFields"/>
         </div>
         <!-- End Post Details -->
 
@@ -43,7 +43,7 @@
         <div class="the-excerpt">
           <p>
             <textarea style="max-width: 100%; min-width: 100%;" class="form-control rounded-0" rows="10"
-                      placeholder="Write something about article." [(ngModel)]="articleDescription"></textarea>
+                      placeholder="Write something about article." [(ngModel)]="articleDescription" [disabled]="disableInputFields"></textarea>
           </p>
         </div>
         <!-- End The Content -->
@@ -57,5 +57,3 @@
   <hr>
   <app-spinner [inputValue]="4" [minValue]="1" [maxValue]="4"></app-spinner>
 </div>
-
-

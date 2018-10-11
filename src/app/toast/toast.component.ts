@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-toast',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToastComponent implements OnInit {
 
-  constructor() { }
+  @Input() toast: boolean = true;
+  @Input() on_off_btn: boolean = true;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
+  clickToastBtn(event,btn){
+    this.toast = false;
+  }
 }

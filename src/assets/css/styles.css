@@ -528,7 +528,7 @@ body {
   height: 60px;
   display: inline-block;
   position: fixed;
-  z-index: 999;
+  z-index: 9;  /*Toast z-index = 10*/
   cursor: pointer;
 }
 
@@ -1653,7 +1653,7 @@ app-spinner {
   justify-content: center;
   flex-direction: column;
   font-weight: 200;
-  height: 360px;
+  height: 400px;
   background: #d4d4d4;
 }
 

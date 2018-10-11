@@ -32,7 +32,9 @@
   <div *ngIf="!isPageLoading" class="container">
     <div class="row">
       <app-admin-menu (selectNewTab)="changeContent($event)" [showMenu]="showMenu"></app-admin-menu>
-      <app-add-new-article></app-add-new-article>
+
+      <app-article-skeleton></app-article-skeleton>
+
     </div>
   </div>
 
