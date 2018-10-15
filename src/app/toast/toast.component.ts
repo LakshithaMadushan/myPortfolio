@@ -32,6 +32,10 @@ export class ToastComponent implements OnInit {
     }
   }
 
+  static reset(){
+    ToastComponent.btnResponse = new ReplaySubject();
+  }
+
   get staticToast() {
     return ToastComponent.toast;
   }

@@ -18,7 +18,6 @@ export class ArticleSkeletonComponent implements OnInit {
   @Input() spinner_minValue: number;
   @Input() spinner_maxValue: number;
 
-
   constructor() {
   }
 
@@ -40,9 +39,9 @@ export class ArticleSkeletonComponent implements OnInit {
     // console.log(this.articleDescription);
 
     ToastComponent.toast = true;
-    ToastComponent.on_off_btn = false;
+    ToastComponent.on_off_btn = true;
 
-    ToastComponent.btnResponse = new ReplaySubject();
+    ToastComponent.reset();
     ToastComponent.btnResponse.subscribe({
       next: (res) => {
         if (res == 'Yes') {
