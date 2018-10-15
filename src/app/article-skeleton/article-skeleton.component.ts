@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ToastComponent} from "../toast/toast.component";
-import {ReplaySubject} from "rxjs/index";
 
 @Component({
   selector: 'app-article-skeleton',

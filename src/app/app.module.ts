@@ -15,6 +15,8 @@ import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { ToastComponent } from './toast/toast.component';
 import { ArticleSkeletonComponent } from './article-skeleton/article-skeleton.component';
+import { FileSizePipePipe } from './custom-pipes/file-size-pipe.pipe';
+import { DropZoneDirectiveDirective } from './custom-directives/drop-zone-directive.directive';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { ArticleSkeletonComponent } from './article-skeleton/article-skeleton.co
     AdminMenuComponent,
     SpinnerComponent,
     ToastComponent,
-    ArticleSkeletonComponent
+    ArticleSkeletonComponent,
+    FileSizePipePipe,
+    DropZoneDirectiveDirective
   ],
   imports: [
     BrowserModule,
