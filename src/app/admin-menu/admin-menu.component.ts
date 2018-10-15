@@ -8,22 +8,23 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class AdminMenuComponent implements OnInit {
 
   @Input() showMenu: boolean = false;
-  @Input() selectedTab: string = 'MyThings';
-  @Output() selectNewTab = new EventEmitter();
+  @Input() adminMenuSelectedTab: string = 'Insert';
+  @Output() adminMenuSelectNewTab = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  selectTab(tabName: string) {
+  adminMenuSelectTab(tabName: string) {
 
-    if (this.selectedTab != tabName) {
+    if (this.adminMenuSelectedTab != tabName) {
       window.scrollTo(0, 0);
     }
 
-    this.selectedTab = tabName;
-    this.selectNewTab.emit(this.selectedTab);
+    this.adminMenuSelectedTab = tabName;
+    this.adminMenuSelectNewTab.emit(this.adminMenuSelectedTab);
 
   }
 

@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ToastComponent} from "../toast/toast.component";
+import {ReplaySubject} from "rxjs/index";
 
 @Component({
   selector: 'app-article-skeleton',
@@ -12,6 +14,10 @@ export class ArticleSkeletonComponent implements OnInit {
   @Input() articleDate: string;
   @Input() articleDescription: string;
   @Input() disableInputFields: boolean;
+  @Input() spinner_inputValue: number;
+  @Input() spinner_minValue: number;
+  @Input() spinner_maxValue: number;
+
 
   constructor() {
   }
@@ -29,9 +35,29 @@ export class ArticleSkeletonComponent implements OnInit {
   }
 
   clickPushButton() {
-    console.log(this.articleName);
-    console.log(this.articleDate);
-    console.log(this.articleDescription);
+    // console.log(this.articleName);
+    // console.log(this.articleDate);
+    // console.log(this.articleDescription);
+
+    ToastComponent.toast = true;
+    ToastComponent.on_off_btn = false;
+
+    ToastComponent.btnResponse = new ReplaySubject();
+    ToastComponent.btnResponse.subscribe({
+      next: (res) => {
+        if (res == 'Yes') {
+          console.log("Yes Clicked!");
+        }
+        if (res == 'No') {
+          console.log("No Clicked!");
+        }
+        if (res == 'Ok') {
+          console.log("Ok Clicked!");
+        }
+      },
+      error: (err) => console.log('observerB: ' + err),
+    });
+
   }
 
 }

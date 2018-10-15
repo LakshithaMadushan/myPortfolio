@@ -4,7 +4,7 @@
       <div class="table-cell">
         <!-- Logo -->
         <div class="logo">
-          <a href="index-2.html">Buddy</a>
+          <a>Buddy</a>
         </div>
         <!-- End Logo -->
 
@@ -13,29 +13,15 @@
           <nav>
             <ul class="menu-list">
               <li (click)="selectTab('MyThings')"
-                  [ngClass]="(selectedTab=='MyThings')?'active menu-item-has-children':''">
+                  [ngClass]="(selectedTab=='MyThings')?'active':''">
                 <a>MyThings</a>
-                <!--<ul class="sub-menu">-->
-                  <!--<li>-->
-                    <!--<a href="index-2.html">List Layout</a>-->
-                  <!--</li>-->
-                  <!--<li>-->
-                    <!--<a href="index-3.html">Tiled Layout</a>-->
-                  <!--</li>-->
-                  <!--<li>-->
-                    <!--<a href="index-header-text.html">Header Text</a>-->
-                  <!--</li>-->
-                  <!--<li>-->
-                    <!--<a href="index-menu-right.html">Menu Right</a>-->
-                  <!--</li>-->
-                <!--</ul>-->
               </li>
               <li (click)="selectTab('AboutMe')"
-                  [ngClass]="(selectedTab=='AboutMe')?'active menu-item-has-children':''">
+                  [ngClass]="(selectedTab=='AboutMe')?'active':''">
                 <a>AboutMe</a>
               </li>
               <li (click)="selectTab('CatchMe')"
-                  [ngClass]="(selectedTab=='CatchMe')?'active menu-item-has-children':''">
+                  [ngClass]="(selectedTab=='CatchMe')?'active':''">
                 <a>CatchMe</a>
               </li>
             </ul>

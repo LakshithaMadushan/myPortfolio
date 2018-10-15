@@ -20,6 +20,7 @@ export class AppComponent {
   showMenu: boolean = false;
   isPageLoading: boolean = true;
   selectedTab: string = 'MyThings';
+  adminMenuSelectedTab: string = 'Insert';
 
   paginationStart: number = 1;
   paginationEnd: number = 5;
@@ -36,6 +37,10 @@ export class AppComponent {
 
   changeContent(selectedTab) {
     this.selectedTab = selectedTab;
+  }
+
+  adminMenuChangeContent(adminMenuSelectedTab) {
+    this.adminMenuSelectedTab = adminMenuSelectedTab;
   }
 
   currentPageNumber(pageNumber) {

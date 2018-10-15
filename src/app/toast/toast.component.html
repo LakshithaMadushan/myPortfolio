@@ -1,13 +1,13 @@
-<div class="toast_wrapper" [ngClass]="toast?'show':''">
-  <div class="toast" [ngClass]="toast?'show':''">
+<div class="toast_wrapper" [ngClass]="(staticToast)?'show':''">
+  <div class="toast" [ngClass]="(staticToast)?'show':''">
     <span
       class="txt">Some text some message Some text some message Some text some message Some text some message </span>
-    <div *ngIf="on_off_btn" class="button">
-      <button (click)="clickToastBtn($event,'yes')">Yes</button>
-      <button (click)="clickToastBtn($event,'no')">No</button>
+    <div *ngIf="(staticOn_off_btn)" class="button">
+      <button (click)="clickToastBtn($event,'Yes')">Yes</button>
+      <button (click)="clickToastBtn($event,'No')">No</button>
     </div>
-    <div *ngIf="!on_off_btn" class="button">
-      <button (click)="clickToastBtn($event,'ok')">Ok</button>
+    <div *ngIf="!(staticOn_off_btn)" class="button">
+      <button (click)="clickToastBtn($event,'Ok')">Ok</button>
     </div>
   </div>
 </div>

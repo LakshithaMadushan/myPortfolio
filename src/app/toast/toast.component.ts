@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ReplaySubject} from 'rxjs';
 
 @Component({
   selector: 'app-toast',
@@ -7,8 +8,9 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ToastComponent implements OnInit {
 
-  @Input() toast: boolean = true;
-  @Input() on_off_btn: boolean = true;
+  static toast: boolean = false;
+  static on_off_btn: boolean = true;
+  static btnResponse: any;
 
   constructor() {
   }
@@ -16,7 +18,25 @@ export class ToastComponent implements OnInit {
   ngOnInit() {
   }
 
-  clickToastBtn(event,btn){
-    this.toast = false;
+  clickToastBtn(event, btn) {
+    ToastComponent.toast = false;
+
+    if (btn == 'Yes') {
+      ToastComponent.btnResponse.next('Yes');
+    }
+    if (btn == 'No') {
+      ToastComponent.btnResponse.next('No');
+    }
+    if (btn == 'Ok') {
+      ToastComponent.btnResponse.next('Ok');
+    }
+  }
+
+  get staticToast() {
+    return ToastComponent.toast;
+  }
+
+  get staticOn_off_btn() {
+    return ToastComponent.on_off_btn;
   }
 }
