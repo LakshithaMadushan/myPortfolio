@@ -17,6 +17,10 @@ import { ToastComponent } from './toast/toast.component';
 import { ArticleSkeletonComponent } from './article-skeleton/article-skeleton.component';
 import { FileSizePipePipe } from './custom-pipes/file-size-pipe.pipe';
 import { DropZoneDirectiveDirective } from './custom-directives/drop-zone-directive.directive';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,10 @@ import { DropZoneDirectiveDirective } from './custom-directives/drop-zone-direct
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    AngularFireStorageModule,
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]

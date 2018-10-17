@@ -1,5 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ToastComponent} from "../toast/toast.component";
+import {AngularFireStorage, AngularFireUploadTask} from 'angularfire2/storage';
+import {AngularFirestore} from 'angularfire2/firestore';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-article-skeleton',
@@ -17,19 +21,79 @@ export class ArticleSkeletonComponent implements OnInit {
   @Input() spinner_minValue: number;
   @Input() spinner_maxValue: number;
 
-  constructor() {
+  task: AngularFireUploadTask;
+  percentage: Observable<number>;
+  snapshot: Observable<any>;
+  isHovering: boolean;
+  fileName: string;
+  image: any;
+
+  constructor(private storage: AngularFireStorage, private fireStore: AngularFirestore) {
   }
 
   ngOnInit() {
   }
 
   chooseImageFile(event) {
-    var file = event.target.files[0];
-    var reader = new FileReader();
-    reader.onload = (event) => {
-      this.imageURL = event.target.result;
-    };
-    reader.readAsDataURL(file);
+    if (event.target.files.item(0).type.split('/')[0] === 'image') {
+      var file = event.target.files[0];
+      var reader = new FileReader();
+      reader.onload = (event) => {
+        this.imageURL = event.target.result;
+      };
+      reader.readAsDataURL(file);
+
+      this.startUpload(event.target.files);
+    } else {
+      console.error('unsupported file type :( ');
+    }
+  }
+
+  dropImage(event) {
+    if (event.files.item(0).type.split('/')[0] === 'image') {
+      var file = event.files[0];
+      var reader = new FileReader();
+      reader.onload = (event) => {
+        this.imageURL = event.target.result;
+      };
+      reader.readAsDataURL(file);
+
+      this.startUpload(event.files);
+    } else {
+      console.error('unsupported file type :( ');
+    }
+  }
+
+  toggleHover(event) {
+    this.isHovering = event;
+  }
+
+  removeImage() {
+    this.imageURL = undefined;
+    this.percentage = undefined;
+    this.snapshot = undefined;
+  }
+
+  startUpload(event: FileList) {
+    const file = event.item(0)
+    this.fileName = file.name;
+
+    const path = `images/${file.name}`;
+    const customMetadata = {app: 'LAKSHITHA MADUSHAN'};
+    this.task = this.storage.ref('').child('images/' + file.name).put(file, {customMetadata});
+    this.percentage = this.task.percentageChanges();
+
+    this.snapshot = this.task.snapshotChanges().pipe(
+      tap(snap => {
+        if (snap.bytesTransferred === snap.totalBytes) {
+          ToastComponent.toastMessage = "Successfully Uploaded !";
+          ToastComponent.toast = true;
+          ToastComponent.on_off_btn = false;
+
+          console.log("Successfully Uploaded !");
+        }
+      })
+    );
   }
 
   clickPushButton() {
@@ -37,6 +101,7 @@ export class ArticleSkeletonComponent implements OnInit {
     // console.log(this.articleDate);
     // console.log(this.articleDescription);
 
+    ToastComponent.toastMessage = "Successfully Uploaded !";
     ToastComponent.toast = true;
     ToastComponent.on_off_btn = true;
 

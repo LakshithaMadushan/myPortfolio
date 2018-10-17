@@ -11,6 +11,7 @@ export class ToastComponent implements OnInit {
   static toast: boolean = false;
   static on_off_btn: boolean = true;
   static btnResponse: any;
+  static toastMessage: string;
 
   constructor() {
   }
@@ -27,12 +28,9 @@ export class ToastComponent implements OnInit {
     if (btn == 'No') {
       ToastComponent.btnResponse.next('No');
     }
-    if (btn == 'Ok') {
-      ToastComponent.btnResponse.next('Ok');
-    }
   }
 
-  static reset(){
+  static reset() {
     ToastComponent.btnResponse = new ReplaySubject();
   }
 
@@ -42,5 +40,9 @@ export class ToastComponent implements OnInit {
 
   get staticOn_off_btn() {
     return ToastComponent.on_off_btn;
+  }
+
+  get toastMessage() {
+    return ToastComponent.toastMessage;
   }
 }

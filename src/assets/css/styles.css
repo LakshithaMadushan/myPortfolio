@@ -1496,13 +1496,11 @@ body {
   padding: 0;
   border: none;
   border-radius: 0;
-
   display: block;
   color: black;
   background-color: #ababab;
-
   width: 100%;
-  height: 4px;
+  height: 6px;
 }
 
 /* Chrome */

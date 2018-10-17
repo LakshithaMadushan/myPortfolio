@@ -10,6 +10,7 @@
   background-color: rgba(0, 0, 0, 0.7);
   visibility: hidden;
   opacity: 0;
+  font-family: 'Roboto', serif;
   -webkit-transition: visibility 0.3s ease, opacity 0.3s ease;
   -moz-transition: visibility 0.3s ease, opacity 0.3s ease;
   -ms-transition: visibility 0.3s ease, opacity 0.3s ease;

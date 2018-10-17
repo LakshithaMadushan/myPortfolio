@@ -20,3 +20,36 @@
   z-index: -1;
 }
 
+.close_btn {
+  padding: 2px 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #000;
+  color: #fff;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.close_btn:hover {
+  color: #ababab;
+}
+
+.post-media {
+  position: relative;
+}
+
+.uploading_img_size {
+  padding: 2px 10px;
+  position: absolute;
+  right: 0;
+  bottom: 5px;
+  margin-bottom: 2px;
+  background-color: #000;
+  color: #fff;
+  margin: 5px;
+  cursor: pointer;
+  font-family: 'Roboto', serif;
+  font-size: 12px;
+}
