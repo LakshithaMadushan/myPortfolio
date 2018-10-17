@@ -28,6 +28,9 @@ export class ToastComponent implements OnInit {
     if (btn == 'No') {
       ToastComponent.btnResponse.next('No');
     }
+    if (btn == 'Ok') {
+      ToastComponent.btnResponse.next('Ok');
+    }
   }
 
   static reset() {

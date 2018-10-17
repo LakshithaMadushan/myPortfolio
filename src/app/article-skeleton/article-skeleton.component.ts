@@ -27,6 +27,7 @@ export class ArticleSkeletonComponent implements OnInit {
   isHovering: boolean;
   fileName: string;
   image: any;
+  storageImage: any;
 
   constructor(private storage: AngularFireStorage, private fireStore: AngularFirestore) {
   }
@@ -43,7 +44,8 @@ export class ArticleSkeletonComponent implements OnInit {
       };
       reader.readAsDataURL(file);
 
-      this.startUpload(event.target.files);
+      this.storageImage = event.target.files;
+      // this.startUpload(event.target.files);
     } else {
       console.error('unsupported file type :( ');
     }
@@ -58,7 +60,8 @@ export class ArticleSkeletonComponent implements OnInit {
       };
       reader.readAsDataURL(file);
 
-      this.startUpload(event.files);
+      this.storageImage = event.files;
+      // this.startUpload(event.files);
     } else {
       console.error('unsupported file type :( ');
     }
@@ -91,36 +94,55 @@ export class ArticleSkeletonComponent implements OnInit {
           ToastComponent.on_off_btn = false;
 
           console.log("Successfully Uploaded !");
+          ToastComponent.btnResponse.subscribe({
+            next: (res) => {
+              if (res == 'Ok') {
+                console.log("Ok Clicked!");
+                window.location.reload();
+              }
+            },
+            error: (err) => console.log('observerB: ' + err),
+          });
         }
       })
     );
   }
 
   clickPushButton() {
-    // console.log(this.articleName);
-    // console.log(this.articleDate);
-    // console.log(this.articleDescription);
-
-    ToastComponent.toastMessage = "Successfully Uploaded !";
-    ToastComponent.toast = true;
-    ToastComponent.on_off_btn = true;
-
     ToastComponent.reset();
-    ToastComponent.btnResponse.subscribe({
-      next: (res) => {
-        if (res == 'Yes') {
-          console.log("Yes Clicked!");
-        }
-        if (res == 'No') {
-          console.log("No Clicked!");
-        }
-        if (res == 'Ok') {
-          console.log("Ok Clicked!");
-        }
-      },
-      error: (err) => console.log('observerB: ' + err),
-    });
 
+    if (this.imageURL) {
+      ToastComponent.toastMessage = "Are You Sure ?";
+      ToastComponent.toast = true;
+      ToastComponent.on_off_btn = true;
+      ToastComponent.btnResponse.subscribe({
+        next: (res) => {
+          if (res == 'Yes') {
+            console.log("Yes Clicked!");
+            this.startUpload(this.storageImage);
+          }
+          if (res == 'No') {
+            console.log("No Clicked!");
+          }
+          if (res == 'Ok') {
+            console.log("Ok Clicked!");
+          }
+        },
+        error: (err) => console.log('observerB: ' + err),
+      });
+    } else {
+      ToastComponent.toastMessage = "Fill All The Fields.";
+      ToastComponent.toast = true;
+      ToastComponent.on_off_btn = false;
+      ToastComponent.btnResponse.subscribe({
+        next: (res) => {
+          if (res == 'Ok') {
+            console.log("Ok Clicked!");
+          }
+        },
+        error: (err) => console.log('observerB: ' + err),
+      });
+    }
   }
 
 }
