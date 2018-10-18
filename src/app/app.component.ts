@@ -53,7 +53,12 @@ export class AppComponent {
     if (event == 5) {
       console.log('%c Admin Mode Toggled', 'color: #e67e22; font-weight: bold;');
       this.adminMode = !(this.adminMode);
+      this.resetAdminMenuSelectedTab();
       window.scrollTo(0, 0);
     }
+  }
+
+  resetAdminMenuSelectedTab() {
+    this.adminMenuSelectedTab = 'Insert';
   }
 }
