@@ -1,3 +1,4 @@
+<span class="spinner__text">Article No:</span>
 <div class="spinner__wrap">
   <button class="spinner__minus disable" [class.disable]="minusDisable" (click)="clickMinus()"><i class="fas fa-long-arrow-alt-left"></i></button>
   <input type="number" class="spinner__val" [disabled]="minusDisable && plusDisable" [(ngModel)]="inputValue" (blur)="onChange($event)"/>

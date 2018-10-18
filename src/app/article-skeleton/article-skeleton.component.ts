@@ -20,6 +20,7 @@ export class ArticleSkeletonComponent implements OnInit {
   @Input() spinner_inputValue: number;
   @Input() spinner_minValue: number;
   @Input() spinner_maxValue: number;
+  @Input() buttonText: string;
 
   task: AngularFireUploadTask;
   percentage: Observable<number>;
