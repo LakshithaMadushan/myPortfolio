@@ -61,7 +61,6 @@ export class ArticleSkeletonComponent implements OnInit {
       reader.readAsDataURL(file);
 
       this.storageImage = event.files;
-      // this.startUpload(event.files);
     } else {
       console.error('unsupported file type :( ');
     }
@@ -75,6 +74,7 @@ export class ArticleSkeletonComponent implements OnInit {
     this.imageURL = undefined;
     this.percentage = undefined;
     this.snapshot = undefined;
+    this.task = undefined;
   }
 
   startUpload(event: FileList) {
@@ -87,31 +87,28 @@ export class ArticleSkeletonComponent implements OnInit {
     this.percentage = this.task.percentageChanges();
 
     this.snapshot = this.task.snapshotChanges().pipe(
-      tap(snap => {
+      tap((snap) => {
         if (snap.bytesTransferred === snap.totalBytes) {
-          ToastComponent.toastMessage = "Successfully Uploaded !";
-          ToastComponent.toast = true;
-          ToastComponent.on_off_btn = false;
-
-          console.log("Successfully Uploaded !");
-          ToastComponent.btnResponse.subscribe({
-            next: (res) => {
-              if (res == 'Ok') {
-                console.log("Ok Clicked!");
-                window.location.reload();
-              }
-            },
-            error: (err) => console.log('observerB: ' + err),
-          });
+          this.getImageDownloadURL();
         }
       })
     );
   }
 
+  getImageDownloadURL() {
+    this.task.then((res) => {
+      res.ref.getDownloadURL().then((downloadURL) => {
+        this.updateContentDatabase(downloadURL);
+      }).catch(reason => {
+        console.log(reason);
+      });
+    })
+  }
+
   clickPushButton() {
     ToastComponent.reset();
 
-    if (this.imageURL) {
+    if (this.imageURL && this.articleName && this.articleDate && this.articleDescription) {
       ToastComponent.toastMessage = "Are You Sure ?";
       ToastComponent.toast = true;
       ToastComponent.on_off_btn = true;
@@ -128,10 +125,10 @@ export class ArticleSkeletonComponent implements OnInit {
             console.log("Ok Clicked!");
           }
         },
-        error: (err) => console.log('observerB: ' + err),
+        error: (err) => console.log(err),
       });
     } else {
-      ToastComponent.toastMessage = "Fill All The Fields.";
+      ToastComponent.toastMessage = "Fill All Fields In The Container.";
       ToastComponent.toast = true;
       ToastComponent.on_off_btn = false;
       ToastComponent.btnResponse.subscribe({
@@ -140,9 +137,33 @@ export class ArticleSkeletonComponent implements OnInit {
             console.log("Ok Clicked!");
           }
         },
-        error: (err) => console.log('observerB: ' + err),
+        error: (err) => console.log(err),
       });
     }
   }
 
+  updateContentDatabase(downloadURL) {
+    this.fireStore.collection('articles').add({
+      'imageURL': downloadURL,
+      'title': this.articleName,
+      'date': this.articleDate,
+      'description': this.articleDescription
+    }).then((res) => {
+      ToastComponent.toastMessage = "Successfully Uploaded !";
+      ToastComponent.toast = true;
+      ToastComponent.on_off_btn = false;
+
+      ToastComponent.btnResponse.subscribe({
+        next: (res) => {
+          if (res == 'Ok') {
+            console.log("Ok Clicked!");
+            window.location.reload();
+          }
+        },
+        error: (err) => console.log('observerB: ' + err),
+      });
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
 }

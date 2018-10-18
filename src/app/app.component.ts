@@ -47,4 +47,7 @@ export class AppComponent {
     console.log(pageNumber);
   }
 
+  goAdminMenu() {
+    console.log("go admin menu")
+  }
 }

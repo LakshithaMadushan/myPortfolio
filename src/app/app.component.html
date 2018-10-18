@@ -1,5 +1,9 @@
 <app-toast></app-toast>
 
+<div class="admin-box-wrapper">
+  <div (click)="goAdminMenu()" class="admin-box"></div>
+</div>
+
 <div *ngIf="false" id="main-content">
 
   <app-mobile-menu *ngIf="!isPageLoading" (showMobileMenu)="clickMobileMenubtn($event)"></app-mobile-menu>
@@ -38,7 +42,8 @@
       <app-article-skeleton *ngIf="adminMenuSelectedTab=='Update'" [spinner_inputValue]="1" [spinner_minValue]="1"
                             [spinner_maxValue]="5"></app-article-skeleton>
       <app-article-skeleton [disableInputFields]="true" *ngIf="adminMenuSelectedTab=='Delete'" [spinner_inputValue]="1"
-                            [spinner_minValue]="1" [spinner_maxValue]="5" [imageURL]="'../../assets/images/posts/1.jpg'"></app-article-skeleton>
+                            [spinner_minValue]="1" [spinner_maxValue]="5"
+                            [imageURL]="'../../assets/images/posts/1.jpg'"></app-article-skeleton>
 
     </div>
   </div>

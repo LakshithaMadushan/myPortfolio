@@ -4,7 +4,7 @@
       <div class="post-media">
 
         <!-- Image Remove Button -->
-        <span *ngIf="imageURL" (click)="removeImage()" class="close_btn">
+        <span *ngIf="imageURL && (!(percentage | async | number))" (click)="removeImage()" class="close_btn">
           <i class="fas fa-times"></i>
         </span>
         <!-- End Image Remove Button -->
