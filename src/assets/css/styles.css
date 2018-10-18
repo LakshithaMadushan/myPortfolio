@@ -347,7 +347,7 @@ a {
 }
 
 a:hover {
-  color: #ababab !important;
+  color: #5e5e5e !important;
 }
 
 .quicklinks a:hover,
@@ -528,7 +528,7 @@ body {
   height: 60px;
   display: inline-block;
   position: fixed;
-  z-index: 9;  /*Toast z-index = 10*/
+  z-index: 9; /*Toast z-index = 10*/
   cursor: pointer;
 }
 
@@ -985,7 +985,7 @@ body {
 
 .post .post-content {
   background-color: #eeeeee;
-  padding: 50px 50px 40px;
+  padding: 30px 50px 40px;
 }
 
 .title {
@@ -1608,6 +1608,15 @@ app-spinner {
   border-radius: 50%;*/
 }
 
+.spinner__wrap .spinner__minus, .spinner__plus:hover {
+  background-color: #5e5e5e;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
 .spinner__wrap .spinner__minus.disable, .spinner__plus.disable {
   opacity: 0.2;
   cursor: inherit;
@@ -1651,7 +1660,7 @@ app-spinner {
   justify-content: center;
   flex-direction: column;
   font-weight: 200;
-  height: 400px;
+  height: 420px;
   background: #d4d4d4;
 }
 
@@ -1670,7 +1679,12 @@ app-spinner {
 
 .file:hover {
   border: 1px solid #ababab;
-  color: #ababab;
+  color: #5e5e5e;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .file-input {
@@ -1699,7 +1713,7 @@ app-spinner {
 }
 
 .push-button button {
-  background-color: #0b0b0b;
+  background-color: #000000;
   border: none;
   color: white;
   padding: 3px 25px;
@@ -1707,6 +1721,15 @@ app-spinner {
   text-decoration: none;
   display: inline-block;
   margin-top: 20px;
+}
+
+.push-button button:hover {
+  background-color: #5e5e5e;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 hr {
