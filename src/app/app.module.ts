@@ -21,6 +21,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
+import { ButtonHoldDirective } from './custom-directives/button-hold.directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { environment } from '../environments/environment';
     ToastComponent,
     ArticleSkeletonComponent,
     FileSizePipePipe,
-    DropZoneDirectiveDirective
+    DropZoneDirectiveDirective,
+    ButtonHoldDirective
   ],
   imports: [
     BrowserModule,

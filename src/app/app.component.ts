@@ -17,6 +17,8 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
 })
 export class AppComponent {
 
+  adminMode: boolean = false;
+
   showMenu: boolean = false;
   isPageLoading: boolean = true;
   selectedTab: string = 'MyThings';
@@ -47,7 +49,10 @@ export class AppComponent {
     console.log(pageNumber);
   }
 
-  goAdminMenu() {
-    console.log("go admin menu")
+  goAdminMenu(event) {
+    if (event == 5) {
+      console.log('%c Admin Mode Toggled', 'color: #e67e22; font-weight: bold;');
+      this.adminMode = !(this.adminMode);
+    }
   }
 }

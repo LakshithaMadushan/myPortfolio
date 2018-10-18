@@ -3,4 +3,5 @@ export class ArticleBody {
   articleName: string;
   articleDate: string;
   articleDescription: string;
+  articleNumber: number;
 }
