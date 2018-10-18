@@ -416,11 +416,23 @@ blockquote:before {
   position: absolute;
   left: 0;
   top: 0;
-  content: '\f10d';
-  font-family: 'FontAwesome';
   display: inline-block;
   color: #ababab;
   font-size: 24px;
+}
+
+.blockquote__before {
+  color: #5e5e5e;
+  font-size: 10px;
+  vertical-align: top;
+  padding-right: 7px;
+}
+
+.blockquote__after {
+  color: #5e5e5e;
+  font-size: 10px;
+  vertical-align: bottom;
+  padding-left: 7px;
 }
 
 blockquote footer,
@@ -433,12 +445,6 @@ blockquote cite {
 blockquote footer:before,
 blockquote cite:before {
   content: '- ';
-  color: #333333;
-}
-
-blockquote footer:after,
-blockquote cite:after {
-  content: ' ';
   color: #333333;
 }
 
@@ -703,7 +709,7 @@ body {
 
 .socials a {
   margin-right: 8px;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .socials .fa-search {
@@ -1660,7 +1666,7 @@ app-spinner {
   justify-content: center;
   flex-direction: column;
   font-weight: 200;
-  height: 420px;
+  height: 400px;
   background: #d4d4d4;
 }
 
