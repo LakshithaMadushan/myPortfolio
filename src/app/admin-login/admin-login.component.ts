@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {ToastComponent} from "../toast/toast.component";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-admin-login',
@@ -7,6 +6,8 @@ import {ToastComponent} from "../toast/toast.component";
   styleUrls: ['./admin-login.component.css']
 })
 export class AdminLoginComponent implements OnInit {
+
+  @Output() goAdminFlow = new EventEmitter<boolean>();
 
   static adminLogin: boolean = false;
 
@@ -18,5 +19,10 @@ export class AdminLoginComponent implements OnInit {
 
   get staticAdminLogin() {
     return AdminLoginComponent.adminLogin;
+  }
+
+  clickGo(state) {
+    AdminLoginComponent.adminLogin = state;
+    this.goAdminFlow.emit(true);
   }
 }

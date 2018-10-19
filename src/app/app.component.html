@@ -1,9 +1,9 @@
 <app-toast></app-toast>
 
-<app-admin-login></app-admin-login>
+<app-admin-login (goAdminFlow)="goAdminFlow()"></app-admin-login>
 
 <div class="admin-box-wrapper">
-  <div class="admin-box" ButtonHold (holdTime)="goAdminMenu($event)"></div>
+  <div class="admin-box" ButtonHold (holdTime)="adminLogin($event)"></div>
 </div>
 
 <div *ngIf="!adminMode" id="main-content">

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {trigger, state, style, transition, animate} from '@angular/animations';
+import {AdminLoginComponent} from "./admin-login/admin-login.component";
 
 @Component({
   selector: 'app-root',
@@ -49,13 +50,17 @@ export class AppComponent {
     console.log(pageNumber);
   }
 
-  goAdminMenu(event) {
+  adminLogin(event) {
     if (event == 5) {
       console.log('%c Admin Mode Toggled', 'color: #e67e22; font-weight: bold;');
-      this.adminMode = !(this.adminMode);
-      this.resetAdminMenuSelectedTab();
-      window.scrollTo(0, 0);
+      AdminLoginComponent.adminLogin = true;
     }
+  }
+
+  goAdminFlow() {
+    this.adminMode = !(this.adminMode);
+    this.resetAdminMenuSelectedTab();
+    window.scrollTo(0, 0);
   }
 
   resetAdminMenuSelectedTab() {
