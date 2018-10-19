@@ -10,6 +10,8 @@ export class AdminLoginComponent implements OnInit {
   @Output() goAdminFlow = new EventEmitter<boolean>();
 
   static adminLogin: boolean = false;
+  adminUserName: string;
+  adminPassword: string;
 
   constructor() {
   }
@@ -21,8 +23,10 @@ export class AdminLoginComponent implements OnInit {
     return AdminLoginComponent.adminLogin;
   }
 
-  clickGo(state) {
-    AdminLoginComponent.adminLogin = state;
-    this.goAdminFlow.emit(true);
+  clickGo() {
+    AdminLoginComponent.adminLogin = false;
+    if (this.adminUserName && this.adminPassword) {
+      this.goAdminFlow.emit(true);
+    }
   }
 }

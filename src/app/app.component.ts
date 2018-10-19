@@ -53,7 +53,11 @@ export class AppComponent {
   adminLogin(event) {
     if (event == 5) {
       console.log('%c Admin Mode Toggled', 'color: #e67e22; font-weight: bold;');
-      AdminLoginComponent.adminLogin = true;
+      if (!this.adminMode) {
+        AdminLoginComponent.adminLogin = true;
+      } else {
+        this.adminMode = false;
+      }
     }
   }
 
