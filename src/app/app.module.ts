@@ -22,6 +22,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { ButtonHoldDirective } from './custom-directives/button-hold.directive';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ButtonHoldDirective } from './custom-directives/button-hold.directive';
     ArticleSkeletonComponent,
     FileSizePipePipe,
     DropZoneDirectiveDirective,
-    ButtonHoldDirective
+    ButtonHoldDirective,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,
