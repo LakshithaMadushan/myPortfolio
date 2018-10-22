@@ -1,7 +1,8 @@
 <div class="col-md-9 col-md-offset-3">
-  <div class="projects">
-    <app-article></app-article>
-    <app-article></app-article>
-    <app-article></app-article>
+  <div *ngFor="let article of articleCollection" class="projects">
+    <app-article [imageURL]="article.imageURL"
+                 [articleDate]="article.articleDate"
+                 [articleName]="article.articleName"
+                 [articleDescription]="article.articleDescription"></app-article>
   </div>
 </div>
