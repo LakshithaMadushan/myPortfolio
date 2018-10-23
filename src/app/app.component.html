@@ -41,13 +41,14 @@
       <app-admin-menu (adminMenuSelectNewTab)="adminMenuChangeContent($event)" [showMenu]="showMenu"></app-admin-menu>
 
       <app-article-skeleton [@fadeAnimation] [buttonText]="'Push'" *ngIf="adminMenuSelectedTab=='Insert'"
-                            [spinner_disabledInput]="true" [spinner_inputValue]="numberOfArticles + 1"></app-article-skeleton>
+                            [spinner_disabledInput]="true"
+                            [spinner_inputValue]="numberOfArticles + 1"></app-article-skeleton>
       <app-article-skeleton [@fadeAnimation] [buttonText]="'Update'" *ngIf="adminMenuSelectedTab=='Update'"
                             [spinner_inputValue]="1" [spinner_minValue]="1"
-                            [spinner_maxValue]="5"></app-article-skeleton>
+                            [spinner_maxValue]="numberOfArticles"></app-article-skeleton>
       <app-article-skeleton [@fadeAnimation] [buttonText]="'Delete'" [disableInputFields]="true"
                             *ngIf="adminMenuSelectedTab=='Delete'" [spinner_inputValue]="1"
-                            [spinner_minValue]="1" [spinner_maxValue]="5"
+                            [spinner_minValue]="1" [spinner_maxValue]="numberOfArticles"
                             [imageURL]="'../../assets/images/posts/1.jpg'"></app-article-skeleton>
 
     </div>

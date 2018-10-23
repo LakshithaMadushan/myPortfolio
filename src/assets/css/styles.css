@@ -1614,7 +1614,7 @@ app-spinner {
   border-radius: 50%;*/
 }
 
-.spinner__wrap .spinner__minus, .spinner__plus:hover {
+.spinner__wrap .spinner__minus:hover, .spinner__plus:hover {
   background-color: #5e5e5e;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -1628,7 +1628,7 @@ app-spinner {
   cursor: inherit;
 }
 
-.spinner__wrap .spinner__minus.disable, .spinner__plus.disable:hover {
+.spinner__wrap .spinner__minus.disable:hover, .spinner__plus.disable:hover {
   background-color: #000000;
 }
 

@@ -76,5 +76,5 @@
   </div>
   <hr>
   <app-spinner [disabledInput]="spinner_disabledInput" [inputValue]="spinner_inputValue" [minValue]="spinner_minValue"
-               [maxValue]="spinner_maxValue"></app-spinner>
+               [maxValue]="spinner_maxValue" (spinnerValue)="(spinner_inputValue = $event)"></app-spinner>
 </div>

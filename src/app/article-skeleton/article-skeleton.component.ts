@@ -169,4 +169,11 @@ export class ArticleSkeletonComponent implements OnInit {
       console.error(error);
     });
   }
+
+  deleteArticle(articleNumber: number): Observable<any> {
+    let unwantedArticle = this.fireStore.collection('articles', ref => {
+      return ref.where('articleNumber', '==', articleNumber)
+    }).valueChanges();
+    return unwantedArticle;
+  }
 }
