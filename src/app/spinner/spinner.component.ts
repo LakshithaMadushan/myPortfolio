@@ -11,12 +11,13 @@ export class SpinnerComponent implements OnInit, OnChanges {
   @Input() maxValue: number;
   @Input() plusDisable: boolean;
   @Input() minusDisable: boolean;
+  @Input() disabledInput: boolean;
 
   constructor() {
   }
 
   ngOnInit() {
-    if (this.minValue == this.maxValue) {
+    if (this.minValue == this.maxValue || this.disabledInput) {
       this.minusDisable = true;
       this.plusDisable = true;
     }

@@ -1,6 +1,10 @@
 import {Component} from '@angular/core';
 import {trigger, state, style, transition, animate} from '@angular/animations';
 import {AdminLoginComponent} from "./admin-login/admin-login.component";
+import {AngularFirestore} from "angularfire2/firestore";
+import {ArticleBody} from "./object-models/article";
+import {AngularFirestoreCollection} from "@angular/fire/firestore";
+import {Observable} from "rxjs/index";
 
 @Component({
   selector: 'app-root',
@@ -28,7 +32,22 @@ export class AppComponent {
   paginationStart: number = 1;
   paginationEnd: number = 5;
 
-  constructor() {
+  articleCollection: Array<ArticleBody> = [];
+  articleCollectionFB: AngularFirestoreCollection<ArticleBody>;
+  article: Observable<ArticleBody[]>;
+  numberOfArticles: number;
+
+  constructor(private fireStore: AngularFirestore) {
+    this.articleCollectionFB = fireStore.collection('articles', ref => {
+      return ref.orderBy('articleNumber');
+    });
+    this.article = this.articleCollectionFB.valueChanges();
+
+    this.article.subscribe((res) => {
+      this.articleCollection = res;
+      this.numberOfArticles = res.length;
+    });
+
     setTimeout(() => {
       this.isPageLoading = false;
     }, 3000);

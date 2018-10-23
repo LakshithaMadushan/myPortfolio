@@ -4,7 +4,8 @@
       <div class="post-media">
 
         <!-- Image Remove Button -->
-        <span *ngIf="imageURL && (!(percentage | async | number)) && !disableInputFields" (click)="removeImage()" class="close_btn">
+        <span *ngIf="imageURL && (!(percentage | async | number)) && !disableInputFields" (click)="removeImage()"
+              class="close_btn">
           <i class="fas fa-times"></i>
         </span>
         <!-- End Image Remove Button -->
@@ -74,6 +75,6 @@
     </article>
   </div>
   <hr>
-  <app-spinner [inputValue]="spinner_inputValue" [minValue]="spinner_minValue"
+  <app-spinner [disabledInput]="spinner_disabledInput" [inputValue]="spinner_inputValue" [minValue]="spinner_minValue"
                [maxValue]="spinner_maxValue"></app-spinner>
 </div>

@@ -20,6 +20,7 @@ export class ArticleSkeletonComponent implements OnInit {
   @Input() spinner_inputValue: number;
   @Input() spinner_minValue: number;
   @Input() spinner_maxValue: number;
+  @Input() spinner_disabledInput: boolean;
   @Input() buttonText: string;
 
   task: AngularFireUploadTask;
@@ -146,9 +147,10 @@ export class ArticleSkeletonComponent implements OnInit {
   updateContentDatabase(downloadURL) {
     this.fireStore.collection('articles').add({
       'imageURL': downloadURL,
-      'title': this.articleName,
-      'date': this.articleDate,
-      'description': this.articleDescription
+      'articleName': this.articleName,
+      'articleDate': this.articleDate,
+      'articleDescription': this.articleDescription,
+      'articleNumber': this.spinner_inputValue
     }).then((res) => {
       ToastComponent.toastMessage = "Successfully Uploaded !";
       ToastComponent.toast = true;
@@ -161,7 +163,7 @@ export class ArticleSkeletonComponent implements OnInit {
             window.location.reload();
           }
         },
-        error: (err) => console.log('observerB: ' + err),
+        error: (err) => console.log(err),
       });
     }).catch((error) => {
       console.error(error);

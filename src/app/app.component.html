@@ -1,6 +1,6 @@
-<app-toast></app-toast>
+<app-toast *ngIf="!isPageLoading"></app-toast>
 
-<app-admin-login (goAdminFlow)="goAdminFlow()"></app-admin-login>
+<app-admin-login *ngIf="!isPageLoading" (goAdminFlow)="goAdminFlow()"></app-admin-login>
 
 <div class="admin-box-wrapper">
   <div class="admin-box" ButtonHold (holdTime)="adminLogin($event)"></div>
@@ -13,7 +13,8 @@
   <div *ngIf="!isPageLoading" class="container">
     <div class="row">
 
-      <app-article-container [@fadeAnimation] *ngIf="selectedTab=='MyThings'"></app-article-container>
+      <app-article-container [@fadeAnimation] *ngIf="selectedTab=='MyThings'"
+                             [articleCollection]="articleCollection"></app-article-container>
       <app-about-me [@fadeAnimation] *ngIf="selectedTab=='AboutMe'"></app-about-me>
       <app-menu (selectNewTab)="changeContent($event)" [showMenu]="showMenu"></app-menu>
 
@@ -39,11 +40,13 @@
     <div class="row">
       <app-admin-menu (adminMenuSelectNewTab)="adminMenuChangeContent($event)" [showMenu]="showMenu"></app-admin-menu>
 
-      <app-article-skeleton [@fadeAnimation] [buttonText]="'Push'" *ngIf="adminMenuSelectedTab=='Insert'" [spinner_inputValue]="1" [spinner_minValue]="1"
+      <app-article-skeleton [@fadeAnimation] [buttonText]="'Push'" *ngIf="adminMenuSelectedTab=='Insert'"
+                            [spinner_disabledInput]="true" [spinner_inputValue]="numberOfArticles + 1"></app-article-skeleton>
+      <app-article-skeleton [@fadeAnimation] [buttonText]="'Update'" *ngIf="adminMenuSelectedTab=='Update'"
+                            [spinner_inputValue]="1" [spinner_minValue]="1"
                             [spinner_maxValue]="5"></app-article-skeleton>
-      <app-article-skeleton [@fadeAnimation] [buttonText]="'Update'" *ngIf="adminMenuSelectedTab=='Update'" [spinner_inputValue]="1" [spinner_minValue]="1"
-                            [spinner_maxValue]="5"></app-article-skeleton>
-      <app-article-skeleton [@fadeAnimation] [buttonText]="'Delete'" [disableInputFields]="true" *ngIf="adminMenuSelectedTab=='Delete'" [spinner_inputValue]="1"
+      <app-article-skeleton [@fadeAnimation] [buttonText]="'Delete'" [disableInputFields]="true"
+                            *ngIf="adminMenuSelectedTab=='Delete'" [spinner_inputValue]="1"
                             [spinner_minValue]="1" [spinner_maxValue]="5"
                             [imageURL]="'../../assets/images/posts/1.jpg'"></app-article-skeleton>
 

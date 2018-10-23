@@ -1628,6 +1628,10 @@ app-spinner {
   cursor: inherit;
 }
 
+.spinner__wrap .spinner__minus.disable, .spinner__plus.disable:hover {
+  background-color: #000000;
+}
+
 .spinner__wrap {
   /*display: flex;*/
 }
@@ -1645,6 +1649,7 @@ app-spinner {
 
 .spinner__wrap .spinner__val[type=number] {
   text-align: center;
+  background-color: #ffffff;
   font-size: 20px;
 }
 
