@@ -15,4 +15,8 @@ export class SpinnerService {
   getSpinnerValue(): Observable<number> {
     return this.subjectSpinner.asObservable();
   }
+
+  getSpinnerInstantValue(): number {
+    return this.subjectSpinner.getValue();
+  }
 }

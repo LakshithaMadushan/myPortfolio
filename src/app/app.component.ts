@@ -42,6 +42,7 @@ export class AppComponent {
   articleName: string;
   articleDate: string;
   articleDescription: string;
+  fullArticle: any;
 
   constructor(private fireStore: AngularFirestore, private spinnerService: SpinnerService) {
     this.articleCollectionFB = fireStore.collection('articles', ref => {
@@ -111,10 +112,15 @@ export class AppComponent {
     this.fireStore.collection('articles', ref => {
       return ref.where('articleNumber', '==', articleNumber)
     }).valueChanges().subscribe((res) => {
-      this.imageURL = res[0]['imageURL'];
-      this.articleName = res[0]['articleName'];
-      this.articleDate = res[0]['articleDate'];
-      this.articleDescription = res[0]['articleDescription'];
+      if (res[0]) {
+        this.fullArticle = res[0];
+        this.imageURL = res[0]['imageURL'];
+        this.articleName = res[0]['articleName'];
+        this.articleDate = res[0]['articleDate'];
+        this.articleDescription = res[0]['articleDescription'];
+      }
+    }, (error) => {
+      console.log(error);
     });
   }
 }

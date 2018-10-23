@@ -4,6 +4,7 @@ import {AngularFireStorage, AngularFireUploadTask} from 'angularfire2/storage';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
+import {SpinnerService} from "../spinner/spinner-service.service";
 
 @Component({
   selector: 'app-article-skeleton',
@@ -22,6 +23,7 @@ export class ArticleSkeletonComponent implements OnInit {
   @Input() spinner_maxValue: number;
   @Input() spinner_disabledInput: boolean;
   @Input() buttonText: string;
+  @Input() fullArticle: string;
 
   task: AngularFireUploadTask;
   percentage: Observable<number>;
@@ -31,7 +33,7 @@ export class ArticleSkeletonComponent implements OnInit {
   image: any;
   storageImage: any;
 
-  constructor(private storage: AngularFireStorage, private fireStore: AngularFirestore) {
+  constructor(private storage: AngularFireStorage, private fireStore: AngularFirestore, private spinnerService: SpinnerService) {
   }
 
   ngOnInit() {
@@ -45,9 +47,7 @@ export class ArticleSkeletonComponent implements OnInit {
         this.imageURL = event.target.result;
       };
       reader.readAsDataURL(file);
-
       this.storageImage = event.target.files;
-      // this.startUpload(event.target.files);
     } else {
       console.error('unsupported file type :( ');
     }
@@ -85,7 +85,7 @@ export class ArticleSkeletonComponent implements OnInit {
 
     const path = `images/${file.name}`;
     const customMetadata = {app: 'LAKSHITHA MADUSHAN'};
-    this.task = this.storage.ref('').child('images/' + file.name).put(file, {customMetadata});
+    this.task = this.storage.ref('').child('images/' + this.spinner_inputValue).put(file, {customMetadata});
     this.percentage = this.task.percentageChanges();
 
     this.snapshot = this.task.snapshotChanges().pipe(
@@ -107,40 +107,76 @@ export class ArticleSkeletonComponent implements OnInit {
     })
   }
 
-  clickPushButton() {
+  clickPushButton(buttonText) {
+
     ToastComponent.reset();
 
-    if (this.imageURL && this.articleName && this.articleDate && this.articleDescription) {
-      ToastComponent.toastMessage = "Are You Sure ?";
-      ToastComponent.toast = true;
-      ToastComponent.on_off_btn = true;
-      ToastComponent.btnResponse.subscribe({
-        next: (res) => {
-          if (res == 'Yes') {
-            console.log("Yes Clicked!");
-            this.startUpload(this.storageImage);
-          }
-          if (res == 'No') {
-            console.log("No Clicked!");
-          }
-          if (res == 'Ok') {
-            console.log("Ok Clicked!");
-          }
-        },
-        error: (err) => console.log(err),
+    if (buttonText == 'Push') {
+      if (this.imageURL && this.articleName && this.articleDate && this.articleDescription) {
+        ToastComponent.toastMessage = "Are You Sure ?";
+        ToastComponent.toast = true;
+        ToastComponent.on_off_btn = true;
+        ToastComponent.btnResponse.subscribe({
+          next: (res) => {
+            if (res == 'Yes') {
+              console.log("Yes Clicked!");
+              this.startUpload(this.storageImage);
+            }
+            if (res == 'No') {
+              console.log("No Clicked!");
+            }
+            if (res == 'Ok') {
+              console.log("Ok Clicked!");
+            }
+          },
+          error: (err) => console.log(err),
+        });
+      } else {
+        ToastComponent.toastMessage = "Fill All Fields In The Container.";
+        ToastComponent.toast = true;
+        ToastComponent.on_off_btn = false;
+        ToastComponent.btnResponse.subscribe({
+          next: (res) => {
+            if (res == 'Ok') {
+              console.log("Ok Clicked!");
+            }
+          },
+          error: (err) => console.log(err),
+        });
+      }
+    }
+    if (buttonText == 'Update') {
+
+    }
+    if (buttonText == 'Delete') {
+
+      this.storage.ref('').child(`images/${this.spinnerService.getSpinnerInstantValue()}`).delete();
+
+      let reference = this.fireStore.collection('articles', ref => {
+        return ref.where('articleNumber', '==', this.spinnerService.getSpinnerInstantValue())
       });
-    } else {
-      ToastComponent.toastMessage = "Fill All Fields In The Container.";
-      ToastComponent.toast = true;
-      ToastComponent.on_off_btn = false;
-      ToastComponent.btnResponse.subscribe({
-        next: (res) => {
-          if (res == 'Ok') {
-            console.log("Ok Clicked!");
-          }
-        },
-        error: (err) => console.log(err),
+
+      reference.get().subscribe((value) => {
+        value.forEach((doc) => {
+          doc.ref.delete().then((res) => {
+            console.log('Successfully Deleted Article !');
+            ToastComponent.toastMessage = "Successfully Deleted Article !";
+            ToastComponent.toast = true;
+            ToastComponent.on_off_btn = false;
+
+            ToastComponent.btnResponse.subscribe({
+              next: (res) => {
+                if (res == 'Ok') {
+                  console.log("Ok Clicked!");
+                  window.location.reload();
+                }
+              },
+              error: (err) => console.log(err),
+            });
+          });
+        })
       });
+
     }
   }
 
