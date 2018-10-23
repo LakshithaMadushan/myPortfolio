@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {trigger, state, style, transition, animate} from '@angular/animations';
 import {AdminLoginComponent} from "./admin-login/admin-login.component";
 import {AngularFirestore} from "angularfire2/firestore";
 import {ArticleBody} from "./object-models/article";
 import {AngularFirestoreCollection} from "@angular/fire/firestore";
 import {Observable} from "rxjs/index";
+import {SpinnerService} from "./spinner/spinner-service.service";
 
 @Component({
   selector: 'app-root',
@@ -37,7 +38,12 @@ export class AppComponent {
   article: Observable<ArticleBody[]>;
   numberOfArticles: number;
 
-  constructor(private fireStore: AngularFirestore) {
+  imageURL: string = '../../assets/images/404.jpg';
+  articleName: string;
+  articleDate: string;
+  articleDescription: string;
+
+  constructor(private fireStore: AngularFirestore, private spinnerService: SpinnerService) {
     this.articleCollectionFB = fireStore.collection('articles', ref => {
       return ref.orderBy('articleNumber');
     });
@@ -47,6 +53,12 @@ export class AppComponent {
       this.articleCollection = res;
       this.numberOfArticles = res.length;
     });
+
+    spinnerService.getSpinnerValue().subscribe((value) => {
+      this.spinnerArticleTab(value);
+    }, (error) => {
+      console.log(error);
+    })
 
     setTimeout(() => {
       this.isPageLoading = false;
@@ -63,6 +75,11 @@ export class AppComponent {
 
   adminMenuChangeContent(adminMenuSelectedTab) {
     this.adminMenuSelectedTab = adminMenuSelectedTab;
+
+    if (adminMenuSelectedTab == 'Update') {
+    }
+    if (adminMenuSelectedTab == 'Delete') {
+    }
   }
 
   currentPageNumber(pageNumber) {
@@ -88,5 +105,16 @@ export class AppComponent {
 
   resetAdminMenuSelectedTab() {
     this.adminMenuSelectedTab = 'Insert';
+  }
+
+  spinnerArticleTab(articleNumber: number) {
+    this.fireStore.collection('articles', ref => {
+      return ref.where('articleNumber', '==', articleNumber)
+    }).valueChanges().subscribe((res) => {
+      this.imageURL = res[0]['imageURL'];
+      this.articleName = res[0]['articleName'];
+      this.articleDate = res[0]['articleDate'];
+      this.articleDescription = res[0]['articleDescription'];
+    });
   }
 }

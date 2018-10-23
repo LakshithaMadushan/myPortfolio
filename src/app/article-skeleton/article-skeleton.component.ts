@@ -12,7 +12,7 @@ import {tap} from 'rxjs/operators';
 })
 export class ArticleSkeletonComponent implements OnInit {
 
-  @Input() imageURL: string;  //'../../assets/images/posts/1.jpg'
+  @Input() imageURL: string;
   @Input() articleName: string;
   @Input() articleDate: string;
   @Input() articleDescription: string;
@@ -168,12 +168,5 @@ export class ArticleSkeletonComponent implements OnInit {
     }).catch((error) => {
       console.error(error);
     });
-  }
-
-  deleteArticle(articleNumber: number): Observable<any> {
-    let unwantedArticle = this.fireStore.collection('articles', ref => {
-      return ref.where('articleNumber', '==', articleNumber)
-    }).valueChanges();
-    return unwantedArticle;
   }
 }

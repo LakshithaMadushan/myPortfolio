@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {SpinnerService} from "./spinner-service.service";
 
 @Component({
   selector: 'app-spinner',
@@ -13,9 +14,8 @@ export class SpinnerComponent implements OnInit, OnChanges {
   @Input() minusDisable: boolean;
   @Input() disabledInput: boolean;
 
-  @Output() spinnerValue = new EventEmitter<number>();
-
-  constructor() {
+  constructor(private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinnerValue(this.inputValue);
   }
 
   ngOnInit() {
@@ -43,7 +43,7 @@ export class SpinnerComponent implements OnInit, OnChanges {
       this.plusDisable = true;
     }
     this.minusDisable = false;
-    this.spinnerValue.emit(this.inputValue);
+    this.spinnerService.setSpinnerValue(this.inputValue)
   }
 
   clickMinus() {
@@ -55,7 +55,7 @@ export class SpinnerComponent implements OnInit, OnChanges {
       this.minusDisable = true;
     }
     this.plusDisable = false;
-    this.spinnerValue.emit(this.inputValue);
+    this.spinnerService.setSpinnerValue(this.inputValue);
   }
 
   onChange(newValue) {
@@ -72,7 +72,7 @@ export class SpinnerComponent implements OnInit, OnChanges {
       this.plusDisable = false;
       this.minusDisable = false;
     }
-    this.spinnerValue.emit(this.inputValue);
+    this.spinnerService.setSpinnerValue(this.inputValue);
   }
 
 }
