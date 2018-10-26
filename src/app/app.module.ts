@@ -23,6 +23,9 @@ import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {environment} from '../environments/environment';
 import {ButtonHoldDirective} from './custom-directives/button-hold.directive';
 import {AdminLoginComponent} from './admin-login/admin-login.component';
+import {AuthService} from "./auth-service/auth.service";
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
 
 @NgModule({
   declarations: [
@@ -48,11 +51,13 @@ import {AdminLoginComponent} from './admin-login/admin-login.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

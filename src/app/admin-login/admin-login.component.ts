@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AuthService} from "../auth-service/auth.service";
 
 @Component({
   selector: 'app-admin-login',
@@ -13,7 +14,7 @@ export class AdminLoginComponent implements OnInit {
   adminUserName: string;
   adminPassword: string;
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -26,7 +27,11 @@ export class AdminLoginComponent implements OnInit {
   clickGo() {
     AdminLoginComponent.adminLogin = false;
     if (this.adminUserName && this.adminPassword) {
-      this.goAdminFlow.emit(true);
+      this.authService.emailLogin(this.adminUserName, this.adminPassword);
+      if (this.authService.loginSuccess) {
+        this.goAdminFlow.emit(true);
+      }
     }
   }
+
 }

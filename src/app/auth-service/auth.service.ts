@@ -6,6 +6,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 export class AuthService {
 
   authState: any = null;
+  loginSuccess: boolean = false;
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
     this.afAuth.authState.subscribe((auth) => {
@@ -28,37 +29,27 @@ export class AuthService {
     return this.authenticated ? this.authState.uid : '';
   }
 
-  emailSignUp(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword('lakshitha199412@gmail.com', 'Hassa33221100')
-      .then((user) => {
-        this.authState = user
-        this.updateUserData()
-      })
-      .catch(error => console.log(error));
-  }
+  // emailSignUp(email: string, password: string) {
+  //   return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+  //     .then((user) => {
+  //       this.authState = user
+  //     })
+  //     .catch(error => console.log(error));
+  // }
 
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
-        this.authState = user
-        this.updateUserData()
+        this.authState = user;
+        this.loginSuccess = true;
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.loginSuccess = false;
+      });
   }
 
   signOut(): void {
     this.afAuth.auth.signOut();
-  }
-
-  private updateUserData(): void {
-    let path = `admin/${this.currentUserId}`;
-    let data = {
-      email: this.authState.email,
-      name: this.authState.displayName
-    }
-
-    this.db.object(path).update(data)
-      .catch(error => console.log(error));
   }
 
 }
