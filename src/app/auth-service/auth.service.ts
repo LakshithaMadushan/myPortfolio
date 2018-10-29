@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable()
 export class AuthService {
 
   authState: any = null;
-  loginSuccess: boolean = false;
+  loginSuccess = new BehaviorSubject<boolean>(false);
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
     this.afAuth.authState.subscribe((auth) => {
@@ -24,11 +25,6 @@ export class AuthService {
     return this.authenticated ? this.authState : null;
   }
 
-  // Returns current user UID
-  get currentUserId(): string {
-    return this.authenticated ? this.authState.uid : '';
-  }
-
   // emailSignUp(email: string, password: string) {
   //   return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
   //     .then((user) => {
@@ -41,15 +37,16 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user;
-        this.loginSuccess = true;
+        this.loginSuccess.next(true);
       })
       .catch(error => {
-        this.loginSuccess = false;
+        this.loginSuccess.next(false);
       });
   }
 
   signOut(): void {
     this.afAuth.auth.signOut();
+    this.loginSuccess.next(false);
   }
 
 }

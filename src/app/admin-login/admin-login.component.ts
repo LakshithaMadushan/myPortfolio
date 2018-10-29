@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from "../auth-service/auth.service";
+import {filter, first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-login',
@@ -28,9 +29,14 @@ export class AdminLoginComponent implements OnInit {
     AdminLoginComponent.adminLogin = false;
     if (this.adminUserName && this.adminPassword) {
       this.authService.emailLogin(this.adminUserName, this.adminPassword);
-      if (this.authService.loginSuccess) {
-        this.goAdminFlow.emit(true);
-      }
+      this.authService.loginSuccess.pipe(filter(value =>
+        value == true
+      ), first()).subscribe(value => {
+        if (value == true) {
+          this.goAdminFlow.emit(true);
+          console.log(this.authService.currentUser.user.uid);
+        }
+      });
     }
   }
 

@@ -6,6 +6,7 @@ import {ArticleBody} from "./object-models/article";
 import {AngularFirestoreCollection} from "@angular/fire/firestore";
 import {Observable} from "rxjs/index";
 import {SpinnerService} from "./spinner/spinner-service.service";
+import {AuthService} from "./auth-service/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -44,7 +45,7 @@ export class AppComponent {
   articleDescription: string;
   fullArticle: any;
 
-  constructor(private fireStore: AngularFirestore, private spinnerService: SpinnerService) {
+  constructor(private fireStore: AngularFirestore, private spinnerService: SpinnerService, private authService: AuthService) {
     this.articleCollectionFB = fireStore.collection('articles', ref => {
       return ref.orderBy('articleNumber');
     });
@@ -93,7 +94,8 @@ export class AppComponent {
       if (!this.adminMode) {
         AdminLoginComponent.adminLogin = true;
       } else {
-        this.adminMode = false;
+        this.authService.signOut();
+        window.location.reload();
       }
     }
   }
