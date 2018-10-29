@@ -195,30 +195,50 @@ export class ArticleSkeletonComponent implements OnInit {
 
     }
     if (buttonText == 'Delete') {
-      this.storage.ref('').child(`images/${this.spinnerService.getSpinnerInstantValue()}`).delete();
-      let reference = this.fireStore.collection('articles', ref => {
-        return ref.where('articleNumber', '==', this.spinnerService.getSpinnerInstantValue())
-      });
 
-      reference.get().subscribe((value) => {
-        value.forEach((doc) => {
-          doc.ref.delete().then((res) => {
-            console.log('Successfully Deleted Article !');
-            ToastComponent.toastMessage = "Successfully Deleted Article !";
-            ToastComponent.toast = true;
-            ToastComponent.on_off_btn = false;
+      ToastComponent.toastMessage = "Are You Sure ?";
+      ToastComponent.toast = true;
+      ToastComponent.on_off_btn = true;
+      ToastComponent.btnResponse.subscribe({
+        next: (res) => {
+          if (res == 'Yes') {
+            console.log("Yes Clicked!");
 
-            ToastComponent.btnResponse.subscribe({
-              next: (res) => {
-                if (res == 'Ok') {
-                  console.log("Ok Clicked!");
-                  window.location.reload();
-                }
-              },
-              error: (err) => console.log(err),
+            this.storage.ref('').child(`images/${this.spinnerService.getSpinnerInstantValue()}`).delete();
+            let reference = this.fireStore.collection('articles', ref => {
+              return ref.where('articleNumber', '==', this.spinnerService.getSpinnerInstantValue())
             });
-          });
-        })
+
+            reference.get().subscribe((value) => {
+              value.forEach((doc) => {
+                doc.ref.delete().then((res) => {
+                  console.log('Successfully Deleted Article !');
+                  ToastComponent.toastMessage = "Successfully Deleted Article !";
+                  ToastComponent.toast = true;
+                  ToastComponent.on_off_btn = false;
+
+                  ToastComponent.btnResponse.subscribe({
+                    next: (res) => {
+                      if (res == 'Ok') {
+                        console.log("Ok Clicked!");
+                        window.location.reload();
+                      }
+                    },
+                    error: (err) => console.log(err),
+                  });
+                });
+              })
+            });
+
+          }
+          if (res == 'No') {
+            console.log("No Clicked!");
+          }
+          if (res == 'Ok') {
+            console.log("Ok Clicked!");
+          }
+        },
+        error: (err) => console.log(err),
       });
 
     }
