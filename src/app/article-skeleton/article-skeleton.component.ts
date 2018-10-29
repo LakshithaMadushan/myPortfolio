@@ -146,53 +146,67 @@ export class ArticleSkeletonComponent implements OnInit {
       }
     }
     if (buttonText == 'Update') {
-      const customMetadata = {app: 'LAKSHITHA MADUSHAN'};
-      this.task = this.storage.ref('').child('images/' + this.spinner_inputValue).put(this.storageImage.item(0), {customMetadata});
-      this.percentage = this.task.percentageChanges();
+      if (this.imageURL && this.articleName && this.articleDate && this.articleDescription) {
+        const customMetadata = {app: 'LAKSHITHA MADUSHAN'};
+        this.task = this.storage.ref('').child('images/' + this.spinner_inputValue).put(this.storageImage.item(0), {customMetadata});
+        this.percentage = this.task.percentageChanges();
 
-      this.snapshot = this.task.snapshotChanges().pipe(
-        tap((snap) => {
-          if (snap.bytesTransferred === snap.totalBytes) {
-            this.task.then((res) => {
-              res.ref.getDownloadURL().then((downloadURL) => {
-                let reference = this.fireStore.collection('articles', ref => {
-                  return ref.where('articleNumber', '==', this.spinnerService.getSpinnerInstantValue())
-                });
+        this.snapshot = this.task.snapshotChanges().pipe(
+          tap((snap) => {
+            if (snap.bytesTransferred === snap.totalBytes) {
+              this.task.then((res) => {
+                res.ref.getDownloadURL().then((downloadURL) => {
+                  let reference = this.fireStore.collection('articles', ref => {
+                    return ref.where('articleNumber', '==', this.spinnerService.getSpinnerInstantValue())
+                  });
 
-                reference.get().subscribe((value) => {
-                  value.forEach((doc) => {
-                    doc.ref.update({
-                      'imageURL': downloadURL,
-                      'articleName': this.articleName,
-                      'articleDate': this.articleDate,
-                      'articleDescription': this.articleDescription,
-                      'articleNumber': this.spinner_inputValue
-                    }).then((res) => {
-                      console.log('Successfully Updated Article !');
-                      ToastComponent.toastMessage = "Successfully Updated Article !";
-                      ToastComponent.toast = true;
-                      ToastComponent.on_off_btn = false;
+                  reference.get().subscribe((value) => {
+                    value.forEach((doc) => {
+                      doc.ref.update({
+                        'imageURL': downloadURL,
+                        'articleName': this.articleName,
+                        'articleDate': this.articleDate,
+                        'articleDescription': this.articleDescription,
+                        'articleNumber': this.spinner_inputValue
+                      }).then((res) => {
+                        console.log('Successfully Updated Article !');
+                        ToastComponent.toastMessage = "Successfully Updated Article !";
+                        ToastComponent.toast = true;
+                        ToastComponent.on_off_btn = false;
 
-                      ToastComponent.btnResponse.subscribe({
-                        next: (res) => {
-                          if (res == 'Ok') {
-                            console.log("Ok Clicked!");
-                            window.location.reload();
-                          }
-                        },
-                        error: (err) => console.log(err),
+                        ToastComponent.btnResponse.subscribe({
+                          next: (res) => {
+                            if (res == 'Ok') {
+                              console.log("Ok Clicked!");
+                              window.location.reload();
+                            }
+                          },
+                          error: (err) => console.log(err),
+                        });
                       });
-                    });
-                  })
+                    })
+                  });
+                }).catch(reason => {
+                  console.log(reason);
                 });
-              }).catch(reason => {
-                console.log(reason);
-              });
-            })
-          }
-        })
-      );
+              })
+            }
+          })
+        );
 
+      } else {
+        ToastComponent.toastMessage = "Fill All Fields In The Container.";
+        ToastComponent.toast = true;
+        ToastComponent.on_off_btn = false;
+        ToastComponent.btnResponse.subscribe({
+          next: (res) => {
+            if (res == 'Ok') {
+              console.log("Ok Clicked!");
+            }
+          },
+          error: (err) => console.log(err),
+        });
+      }
     }
     if (buttonText == 'Delete') {
 
