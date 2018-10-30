@@ -147,52 +147,79 @@ export class ArticleSkeletonComponent implements OnInit {
     }
     if (buttonText == 'Update') {
       if (this.imageURL && this.articleName && this.articleDate && this.articleDescription) {
-        const customMetadata = {app: 'LAKSHITHA MADUSHAN'};
-        this.task = this.storage.ref('').child('images/' + this.spinner_inputValue).put(this.storageImage.item(0), {customMetadata});
-        this.percentage = this.task.percentageChanges();
 
-        this.snapshot = this.task.snapshotChanges().pipe(
-          tap((snap) => {
-            if (snap.bytesTransferred === snap.totalBytes) {
-              this.task.then((res) => {
-                res.ref.getDownloadURL().then((downloadURL) => {
-                  let reference = this.fireStore.collection('articles', ref => {
-                    return ref.where('articleNumber', '==', this.spinnerService.getSpinnerInstantValue())
-                  });
+        let reference = this.fireStore.collection('articles', ref => {
+          return ref.where('articleNumber', '==', this.spinnerService.getSpinnerInstantValue())
+        });
 
-                  reference.get().subscribe((value) => {
-                    value.forEach((doc) => {
-                      doc.ref.update({
-                        'imageURL': downloadURL,
-                        'articleName': this.articleName,
-                        'articleDate': this.articleDate,
-                        'articleDescription': this.articleDescription,
-                        'articleNumber': this.spinner_inputValue
-                      }).then((res) => {
-                        console.log('Successfully Updated Article !');
-                        ToastComponent.toastMessage = "Successfully Updated Article !";
-                        ToastComponent.toast = true;
-                        ToastComponent.on_off_btn = false;
+        if (this.storageImage) {
+          const customMetadata = {app: 'LAKSHITHA MADUSHAN'};
+          this.task = this.storage.ref('').child(`images/${this.spinnerService.getSpinnerInstantValue()}`).put(this.storageImage.item(0), {customMetadata});
+          this.percentage = this.task.percentageChanges();
 
-                        ToastComponent.btnResponse.subscribe({
-                          next: (res) => {
-                            if (res == 'Ok') {
-                              console.log("Ok Clicked!");
-                              window.location.reload();
-                            }
-                          },
-                          error: (err) => console.log(err),
+          this.snapshot = this.task.snapshotChanges().pipe(
+            tap((snap) => {
+              if (snap.bytesTransferred === snap.totalBytes) {
+                this.task.then((res) => {
+                  res.ref.getDownloadURL().then((downloadURL) => {
+                    reference.get().subscribe((value) => {
+                      value.forEach((doc) => {
+                        doc.ref.update({
+                          'imageURL': downloadURL,
+                          'articleName': this.articleName,
+                          'articleDate': this.articleDate,
+                          'articleDescription': this.articleDescription,
+                        }).then((res) => {
+                          console.log('Successfully Updated Article !');
+                          ToastComponent.toastMessage = "Successfully Updated Article !";
+                          ToastComponent.toast = true;
+                          ToastComponent.on_off_btn = false;
+
+                          ToastComponent.btnResponse.subscribe({
+                            next: (res) => {
+                              if (res == 'Ok') {
+                                console.log("Ok Clicked!");
+                                window.location.reload();
+                              }
+                            },
+                            error: (err) => console.log(err),
+                          });
                         });
-                      });
-                    })
+                      })
+                    });
+                  }).catch(reason => {
+                    console.log(reason);
                   });
-                }).catch(reason => {
-                  console.log(reason);
+                })
+              }
+            })
+          );
+        } else {
+          reference.get().subscribe((value) => {
+            value.forEach((doc) => {
+              doc.ref.update({
+                'articleName': this.articleName,
+                'articleDate': this.articleDate,
+                'articleDescription': this.articleDescription,
+              }).then((res) => {
+                console.log('Successfully Updated Article !');
+                ToastComponent.toastMessage = "Successfully Updated Article !";
+                ToastComponent.toast = true;
+                ToastComponent.on_off_btn = false;
+
+                ToastComponent.btnResponse.subscribe({
+                  next: (res) => {
+                    if (res == 'Ok') {
+                      console.log("Ok Clicked!");
+                      window.location.reload();
+                    }
+                  },
+                  error: (err) => console.log(err),
                 });
-              })
-            }
+              });
+            })
           })
-        );
+        }
 
       } else {
         ToastComponent.toastMessage = "Fill All Fields In The Container.";
@@ -226,6 +253,17 @@ export class ArticleSkeletonComponent implements OnInit {
             reference.get().subscribe((value) => {
               value.forEach((doc) => {
                 doc.ref.delete().then((res) => {
+
+
+                  this.fireStore.collection('articles', ref => {
+                    return ref.where('articleNumber', '>', this.spinnerService.getSpinnerInstantValue()).orderBy('articleNumber');
+                  }).valueChanges().subscribe((value) => {
+                    value.forEach(article => {
+                      console.log(article);
+                    });
+                  });
+
+
                   console.log('Successfully Deleted Article !');
                   ToastComponent.toastMessage = "Successfully Deleted Article !";
                   ToastComponent.toast = true;

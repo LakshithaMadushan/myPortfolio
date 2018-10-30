@@ -72,7 +72,7 @@ export class SpinnerComponent implements OnInit, OnChanges {
       this.plusDisable = false;
       this.minusDisable = false;
     }
-    this.spinnerService.setSpinnerValue(this.inputValue);
+    this.spinnerService.setSpinnerValue(+(this.inputValue));
   }
 
 }
