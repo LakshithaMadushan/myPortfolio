@@ -254,16 +254,6 @@ export class ArticleSkeletonComponent implements OnInit {
               value.forEach((doc) => {
                 doc.ref.delete().then((res) => {
 
-
-                  this.fireStore.collection('articles', ref => {
-                    return ref.where('articleNumber', '>', this.spinnerService.getSpinnerInstantValue()).orderBy('articleNumber');
-                  }).valueChanges().subscribe((value) => {
-                    value.forEach(article => {
-                      console.log(article);
-                    });
-                  });
-
-
                   console.log('Successfully Deleted Article !');
                   ToastComponent.toastMessage = "Successfully Deleted Article !";
                   ToastComponent.toast = true;
